@@ -30,6 +30,7 @@ void setup(){
   crafter=loadShape("data/modles/crafter/tinker.obj");
   biMetalic_plate=loadShape("data/modles/bimetalic_plate/tinker.obj");
   outline=loadShape("data/modles/outline/tinker.obj");
+  copper_Pipe=loadShape("data/modles/copper_pipe/tinker.obj");
   
   ingot.scale(4);
   iron_ingot.scale(2);
@@ -43,6 +44,7 @@ void setup(){
   iron_rod.scale(2);
   screw.scale(2);
   biMetalic_plate.scale(2);
+  copper_Pipe.scale(2);
   //theese need to be tested
   shapeMode(CENTER);
   img=loadImage("cbi.png");
@@ -57,7 +59,7 @@ void setup(){
 float camX=0,camY=0,camZ=0,eyeX,eyeY,eyeZ,dist=615,Rx=200,Ry=-45,camSpeed=5;//camera position coords
 boolean xu=false,yu=false,zu=false,xd=false,yd=false,zd=false,rxu=false,ryu=false,rxd=false,ryd=false;//camera movemetnt stuffs
 float mouseInterfaceDivisor=1.5,mousePointX=0,mousePointY=0,mousePointZ=0;
-PShape tile,belt,ingot,arrow,tile_selected,missingTexture,spawner,smelter,seller,iron_ore,iron_ingot,copper_ore,copper_ingot,steel,spliter,coal,electric_arc_furnace,steel_plate,copper_Plate,iron_rod,screw,crafter,biMetalic_plate,outline;
+PShape tile,belt,ingot,arrow,tile_selected,missingTexture,spawner,smelter,seller,iron_ore,iron_ingot,copper_ore,copper_ingot,steel,spliter,coal,electric_arc_furnace,steel_plate,copper_Plate,iron_rod,screw,crafter,biMetalic_plate,outline,copper_Pipe;
 Placeable tiles[][];
 boolean inGame=true,building=false,buildings1Menue=false,ticking=true,tileSelected=false,deleteting=false,gamePaused=false,gameSpeed1=false,gameSpeed2=true,gameSpeed3=false,pauseMenue=false,savingAs=false,loadingLevel=false,helpInformationScreen=false;//general booleans
 int buildRotation=0,tickRateMsLimit=50,ptt=0,selectedTileX=0,selectedTileZ=0,selectedFileNumber=0;
@@ -318,6 +320,9 @@ void draw(){
           if(recipie.equals("bimetalic plate")){
             rect(width*0.52+width*0.03,height-(height/25.0)*2,width*0.34,height/25.0);
           }
+          if(recipie.equals("copper pipe")){
+            rect(width*0.86+width*0.03,height-(height/25.0)*2,width*0.11,height/25.0);
+          }
           fill(0);
           line(width*0.12,height-(height/25.0)*2,width*0.12,height-(height/25.0));
           text("2X steel = steel plate",width*0.06,height-(height/25.0)-(height/25.0)/2);
@@ -329,6 +334,8 @@ void draw(){
           text("1X iron rod = 2X screw",width*0.46+width*0.03,height-(height/25.0)-(height/25.0)/2);
           line(width*0.86+width*0.03,height-(height/25.0)*2,width*0.86+width*0.03,height-(height/25.0));
           text("1X steel plate + 1X copper plate + 4X screw = 1X bimetalic plate",width*0.69+width*0.03,height-(height/25.0)-(height/25.0)/2);
+          //line(width*0.86+width*0.03,height-(height/25.0)*2,width*0.86+width*0.03,height-(height/25.0));
+          text("1X copper plate = \n1X copper pipe",width*0.91+width*0.03,height-(height/25.0)-(height/25.0)/2-height*0.01);
         }
       }
       fill(#95F7FF);
@@ -673,6 +680,9 @@ void mouseClicked(){
           }
           if(mouseX>=width*0.52+width*0.03&&mouseX<=width*0.86+width*0.03){
             tiles[selectedTileX][selectedTileZ].setRecipie("bimetalic plate");
+          }
+          if(mouseX>=width*0.86+width*0.03&&mouseX<=width){
+            tiles[selectedTileX][selectedTileZ].setRecipie("copper pipe");
           }
         }//end of if elected ting is cr\after
         return;
