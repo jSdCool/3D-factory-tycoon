@@ -265,3 +265,24 @@ class BimetalicPlate extends Material{
    return new BimetalicPlate();
   }
 }
+
+class CopperPipe extends Material{
+  CopperPipe(){
+   super(); 
+   type="copper pipe";
+   spawnDelay=24;
+   value=30;
+  }
+  
+  void draw(){
+    
+   rotateY(radians(roataion)); 
+   translate(0,-1,-10);
+   shape(copper_Pipe);
+   translate(0,1,10);
+   rotateY(-radians(roataion)); 
+  }
+  Material NEW(){
+   return new CopperPipe();
+  }
+}
