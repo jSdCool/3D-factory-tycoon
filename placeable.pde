@@ -706,6 +706,12 @@ class Crafter extends Placeable{
        return true;
       }
     }
+    if(recipie.equals("copper pipe")){
+      if(m.getType().equals("copper plate")){
+       inputBuffer.add(m); 
+       return true;
+      }
+    }
     
     return false;
   }
@@ -731,6 +737,9 @@ class Crafter extends Placeable{
     if(recipie.equals("bimetalic plate")){
       outputMaterial=new BimetalicPlate();
     }
+    if(recipie.equals("copper pipe")){
+      outputMaterial=new CopperPipe();
+    }
     return this;
   }
   
@@ -755,6 +764,17 @@ class Crafter extends Placeable{
         cooldown=0;
         inventory.remove(0);
         product+=2;
+      }else{
+        cooldown++;
+      }
+     }
+    }
+    if(recipie.equals("copper pipe")){
+     if(inventory.size()>=1){
+      if(cooldown==outputMaterial.getSpawnDelay()){
+        cooldown=0;
+        inventory.remove(0);
+        product+=1;
       }else{
         cooldown++;
       }
